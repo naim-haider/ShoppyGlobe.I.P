@@ -23,20 +23,65 @@ const ProductItem = ({ product }) => {
     }
   };
 
+  // for rating stars //
+  const totalStars = 5;
+  const fullStars = Math.floor(product.rating); // Full stars
+  const halfStar = product.rating % 1 >= 0.5; // Half star if rating has decimal part
+  const emptyStars = totalStars - fullStars - (halfStar ? 1 : 0); // Empty stars
+
   return (
-    <div className="product-item">
-      <Link to={`/product/${product.id}`}>
-        <img src={product.images[0]} height={100} alt={product.name} />
-      </Link>
-      <Link to={`/product/${product.id}`}>
-        <h3>{product.title}</h3>
-      </Link>
-      <p>${product.price}</p>
-      <button onClick={handleAddToCart}>
-        {isInCart ? "Added to Cart" : "Add to Cart"}
-      </button>
-      {addedMessage && <p className="added-message">{addedMessage}</p>}
-    </div>
+    <>
+      <div className="w-full  mb-4 sm:w-1/2 md:w-1/2 xl:w-1/4 p-4 c-card block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden transition duration-700 ease-in-out">
+        <Link
+          to={`/product/${product.id}`}
+          className="c-card block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden transition duration-700 ease-in-out "
+        >
+          <div className="relative pb-48 overflow-hidden">
+            <img
+              className="absolute inset-0 h-full w-full object-contain"
+              src={product.images[0]}
+              alt={product.name}
+            />
+          </div>
+        </Link>
+        <div className="p-4">
+          <span className="inline-block px-2 py-1 leading-none bg-orange-200 text-orange-800 rounded-full font-semibold uppercase tracking-wide text-xs">
+            {product.availabilityStatus}
+          </span>
+          <Link to={`/product/${product.id}`}>
+            <h2 className="mt-2 mb-2 text-[#4e443e] font-bold">
+              {product.title}
+            </h2>
+          </Link>
+          <p className="text-sm text-[#4e443e]">{product.description}</p>
+          <div className="mt-3 flex items-center">
+            <span className="font-bold text-xl text-[#4e443e]">
+              {product.price}
+            </span>
+            &nbsp;
+            <span className="text-sm font-semibold">$</span>
+          </div>
+        </div>
+        <div className="p-1 border-t border-b text-xs text-gray-700">
+          <button className="w-full" onClick={handleAddToCart}>
+            <span className="flex cursor-pointer justify-center items-center p-2 rounded-md w-full text-sm tracking-wide bg-[#c1a49e] text-[#262220] transition-all duration-500 hover:bg-transparent hover:border-solid hover:border-[1px] hover:border-[#262220]">
+              {isInCart ? "Added to Cart" : "Add to Cart"}
+            </span>
+          </button>
+          <span className="flex items-center justify-center">
+            {addedMessage && <p className="added-message">{addedMessage}</p>}
+          </span>
+        </div>
+        <div className="p-4 flex items-center justify-between text-base text-yellow-400">
+          {"★".repeat(fullStars)}
+          {halfStar ? "☆" : ""}
+          {"☆".repeat(emptyStars)}
+          <span className="ml-2 text-sm text-gray-600">
+            {product.warrantyInformation}
+          </span>
+        </div>
+      </div>
+    </>
   );
 };
 
