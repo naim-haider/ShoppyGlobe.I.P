@@ -2,6 +2,7 @@ import { lazy, Suspense, useState } from "react";
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import NotFound from "./components/NotFound";
+import ProductReview from "./components/ProductReview";
 
 // For performance Optimization //
 const Header = lazy(() => import("./components/Header"));
@@ -19,9 +20,13 @@ function App() {
           <Routes>
             <Route path="/" element={<ProductList />} />
             <Route path="/product/:productId" element={<ProductDetail />} />
+            <Route
+              path="/product/review/:productId"
+              element={<ProductReview />}
+            />
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout" element={<Checkout />} />
-            <Route path="*" element={<NotFound />} />
+            <Route element={<NotFound />} />
             <Route />
           </Routes>
         </Suspense>
