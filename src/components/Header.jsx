@@ -8,7 +8,7 @@ const Header = () => {
   return (
     <>
       <div className="flex flex-wrap">
-        <section className="relative mx-auto">
+        <section className="relative mx-auto w-full">
           <nav className="flex justify-between bg-[#262220] text-white w-[100vw]">
             <div className="px-5 xl:px-12 py-6 flex w-full justify-between items-center">
               <Link

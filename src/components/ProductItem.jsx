@@ -31,7 +31,7 @@ const ProductItem = ({ product }) => {
 
   return (
     <>
-      <div className="w-full  mb-4 sm:w-1/2 md:w-1/2 xl:w-1/4 p-4 c-card block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden transition duration-700 ease-in-out">
+      <div className="w-full mb-4 sm:w-1/2 md:w-1/2 xl:w-1/4 p-4 c-card block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden transition duration-700 ease-in-out">
         <Link
           to={`/product/${product.id}`}
           className="c-card block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden transition duration-700 ease-in-out "
