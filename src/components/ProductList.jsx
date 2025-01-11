@@ -7,6 +7,7 @@ const ProductList = () => {
   const [search, setSearch] = useState("");
   // console.log(products);
 
+  // filtering products
   const filteredProducts = products.filter(
     (product) =>
       product.title &&

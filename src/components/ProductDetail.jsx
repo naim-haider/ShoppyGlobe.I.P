@@ -9,7 +9,7 @@ const ProductDetail = () => {
   const dispatch = useDispatch();
   const { products, error } = useFetch();
   const product = products.find((p) => p.id.toString() === productId);
-  console.log(product);
+  // console.log(product);
 
   // for item already in the cart //
   const cartItems = useSelector((state) => state.cart.items);
@@ -23,6 +23,7 @@ const ProductDetail = () => {
 
   const handleAddToCart = () => {
     if (isInCart) {
+      // if the item is already added this msg will show for 2 sec
       setAddedMessage("This item is already in your cart!");
       setTimeout(() => {
         setAddedMessage("");

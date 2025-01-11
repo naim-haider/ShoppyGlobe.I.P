@@ -7,7 +7,7 @@ const ProductItem = ({ product }) => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
   const [addedMessage, setAddedMessage] = useState("");
-  console.log(product);
+  // console.log(product);
 
   // Check if the item is already in the cart
   const isInCart = cartItems.some((item) => item.id === product.id);

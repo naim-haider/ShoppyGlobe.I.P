@@ -7,16 +7,19 @@ import {
 
 const CartItem = ({ item }) => {
   const dispatch = useDispatch();
-  console.log(item);
+  // console.log(item);
 
+  // dispatching remove item from cart function
   const handleRemove = () => {
     dispatch(removeFromCart(item.id));
   };
 
+  // increase the quantity
   const handleIncrease = () => {
     dispatch(increaseQuantity(item.id));
   };
 
+  // decrease the quantity
   const handleDecrease = () => {
     dispatch(decreaseQuantity(item.id));
   };

@@ -25,6 +25,7 @@ const cartSlice = createSlice({
       // Save cart to localStorage
       localStorage.setItem("cart", JSON.stringify(state));
     },
+    // increase the quatity in the cart
     increaseQuantity: (state, action) => {
       const item = state.items.find((item) => item.id === action.payload);
       if (item) {
@@ -32,6 +33,7 @@ const cartSlice = createSlice({
       }
       localStorage.setItem("cart", JSON.stringify(state));
     },
+    // decrease the quatity in the cart
     decreaseQuantity: (state, action) => {
       const item = state.items.find((item) => item.id === action.payload);
       if (item && item.quantity > 1) {

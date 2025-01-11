@@ -32,6 +32,7 @@ const Checkout = () => {
   };
 
   const handleSubmitOrder = () => {
+    // handled the situation where the user not fill all the details
     if (
       !shippingDetails.firstName ||
       !shippingDetails.lastName ||
@@ -54,6 +55,7 @@ const Checkout = () => {
     navigate("/"); // Redirect to home after order
   };
 
+  // calculating total
   const calculateTotal = () => {
     return cartItems
       .reduce((total, item) => total + item.price * item.quantity, 0)

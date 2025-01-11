@@ -4,15 +4,15 @@ import useFetch from "../hooks/useFetch";
 
 const ProductReview = () => {
   const { productId } = useParams();
-  console.log(productId);
+  // console.log(productId);
 
   //finding product
   const { products, error } = useFetch();
   const product = products.find((p) => p.id.toString() === productId);
-  console.log(product);
+  // console.log(product);
 
   if (error) return <div>Error: {error}</div>;
-  if (!product) return <div>Loading...</div>;
+  if (!product) return <div>Loading...</div>; // when product is not there show this
   const oneDigitRating = Math.floor(product.rating);
 
   return (
