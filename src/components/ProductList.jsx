@@ -18,9 +18,9 @@ const ProductList = () => {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <div className="bg-[#f7f1f0] md:top-24 relative top-0">
-      <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <div className="relative isolate overflow-hidden bg-[#f7f1f0] px-6 py-20 text-center sm:px-16 sm:shadow-sm">
+    <div className=" md:top-24 relative top-0">
+      <div className="mx-auto  max-w-7xl sm:px-6 lg:px-8">
+        <div className="relative mt-20 isolate overflow-hidden px-6 pb-20 text-center sm:px-16 sm:shadow-sm">
           <p className="mx-auto max-w-2xl text-3xl font-bold tracking-tight text-[#262220] sm:text-4xl">
             Didn't find product you were looking for?
           </p>

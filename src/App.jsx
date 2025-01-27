@@ -3,6 +3,8 @@ import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import NotFound from "./components/NotFound";
 import ProductReview from "./components/ProductReview";
+import UserRegister from "./Authentication/UserRegister";
+import UserLogin from "./Authentication/UserLogin";
 
 // For performance Optimization //
 const Header = lazy(() => import("./components/Header"));
@@ -18,6 +20,8 @@ function App() {
         <Suspense fallback={<div>Loading...</div>}>
           <Header />
           <Routes>
+            <Route path="/register" element={<UserRegister />} />
+            <Route path="/login" element={<UserLogin />} />
             <Route path="/" element={<ProductList />} />
             <Route path="/product/:productId" element={<ProductDetail />} />
             <Route

@@ -3,10 +3,13 @@ import connectDB from "./database/db.js";
 import productRoutes from "./routes/productRoutes.js";
 import userRoutes from "./routes/UserRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
+import cors from "cors";
 
-const app = express();
 connectDB();
+const app = express();
 
+// middlewares
+app.use(cors()); // Enable Cross-Origin Resource Sharing
 app.use(express.json()); // to parse JSON bodies
 
 // Routes
