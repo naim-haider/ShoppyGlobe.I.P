@@ -7,11 +7,11 @@ const useFetch = () => {
 
   useEffect(() => {
     axios
-      .get("https://dummyjson.com/products")
-      .then((response) => setProducts(response.data.products))
+      .get("http://localhost:5000/api/products")
+      .then((response) => setProducts(response.data))
       .catch((err) => setError(err.message));
-  }, []);
-  //   returning products and error message after fetching
+  }, [products]);
+
   return { products, error };
 };
 

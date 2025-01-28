@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import ProductItem from "./ProductItem";
-import useFetch from "../hooks/useFetch";
+import useFetch from "../../hooks/useFetch";
+import AdminProductCard from "./AdminProductCard";
 
-const ProductList = () => {
+const AdminDashboard = () => {
   const { products, error } = useFetch();
   const [search, setSearch] = useState("");
   // console.log(products);
@@ -59,13 +59,16 @@ const ProductList = () => {
           </svg>
         </div>
       </div>
+      {/*  */}
+
+      {/*  */}
       <div className="container mx-auto">
         <div className="flex flex-wrap justify-center gap-5">
           {filteredProducts.length === 0 ? (
             <p>No products found</p>
           ) : (
             filteredProducts.map((product) => (
-              <ProductItem key={product._id} product={product} />
+              <AdminProductCard key={product._id} product={product} />
             ))
           )}
         </div>
@@ -74,4 +77,4 @@ const ProductList = () => {
   );
 };
 
-export default ProductList;
+export default AdminDashboard;

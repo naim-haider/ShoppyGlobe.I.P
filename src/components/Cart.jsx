@@ -38,7 +38,7 @@ const Cart = () => {
                 Shopping Cart
               </h2>
               {cartItems.map((item) => (
-                <CartItem key={item.id} item={item} />
+                <CartItem key={item._id} item={item} />
               ))}
               <div className="flex flex-col md:flex-row items-center md:items-center justify-between lg:px-6 pb-6 border-b border-gray-200 max-lg:max-w-lg max-lg:mx-auto">
                 <h5 className="text-[#3a3430] font-manrope font-semibold text-2xl leading-9 w-full max-md:text-center max-md:mb-4">

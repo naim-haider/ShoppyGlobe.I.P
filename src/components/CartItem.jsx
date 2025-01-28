@@ -7,21 +7,18 @@ import {
 
 const CartItem = ({ item }) => {
   const dispatch = useDispatch();
-  // console.log(item);
+  console.log(item);
 
-  // dispatching remove item from cart function
   const handleRemove = () => {
-    dispatch(removeFromCart(item.id));
+    dispatch(removeFromCart(item._id));
   };
 
-  // increase the quantity
   const handleIncrease = () => {
-    dispatch(increaseQuantity(item.id));
+    dispatch(increaseQuantity(item._id));
   };
 
-  // decrease the quantity
   const handleDecrease = () => {
-    dispatch(decreaseQuantity(item.id));
+    dispatch(decreaseQuantity(item._id));
   };
 
   return (
@@ -29,7 +26,7 @@ const CartItem = ({ item }) => {
       <div className="rounded-3xl border-2 border-gray-200 p-4 lg:p-8 grid grid-cols-12 mb-8 max-lg:max-w-lg max-lg:mx-auto gap-y-4 ">
         <div className="col-span-12 lg:col-span-2 img box">
           <img
-            src={item.images[0]}
+            src={item.image}
             alt="product-image"
             className="max-lg:w-full lg:w-[180px] rounded-lg object-cover"
           />
@@ -37,7 +34,7 @@ const CartItem = ({ item }) => {
         <div className="col-span-12 lg:col-span-10 detail w-full lg:pl-3">
           <div className="flex items-center justify-between w-full mb-4">
             <h5 className="font-manrope font-bold text-2xl leading-9 text-[#3a3430]">
-              {item.title}
+              {item.name}
             </h5>
             <button
               onClick={handleRemove}
