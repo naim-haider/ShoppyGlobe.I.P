@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 const Checkout = () => {
   const cartItems = useSelector((state) => state.cart.items);
-  console.log(cartItems);
+  // console.log(cartItems);
 
   const [shippingDetails, setShippingDetails] = useState({
     firstName: "",

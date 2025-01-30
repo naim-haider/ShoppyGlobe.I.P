@@ -6,11 +6,9 @@ export const getCart = async (req, res) => {
   try {
     const cart = await Cart.findOne({ userId: req.user.id });
     // console.log(cart);
-
     if (!cart) {
       return res.status(404).json({ error: "Cart not found" });
     }
-
     res.json(cart);
   } catch (error) {
     res.status(500).json({ error: "Server Error" });
@@ -29,7 +27,7 @@ export const addToCart = async (req, res) => {
     const cart = await Cart.findOne({ userId: req.user.id });
 
     if (cart) {
-      // Check if the product is already in the cart
+      // Checking if the product is already in the cart
       const existingItem = cart.items.find(
         (item) => item.product._id.toString() === productId
       );
@@ -98,9 +96,9 @@ export const clearCart = async (req, res) => {
   try {
     console.log(req.user);
 
-    // Find the user's cart
+    // Find the user cart
     const cart = await Cart.findOne({ userId: req.user.id });
-    console.log(cart);
+    // console.log(cart);
 
     if (!cart) {
       return res.status(404).json({ error: "Cart not found" });

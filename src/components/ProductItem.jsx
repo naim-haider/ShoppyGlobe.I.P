@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from "react-redux";
-// import { addToCart } from "../redux/cartSlice";
 import { addToCartAsync, getCartAsync } from "../redux/cartSlice";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -17,7 +16,7 @@ const ProductItem = ({ product }) => {
     dispatch(getCartAsync());
   }, [dispatch]);
 
-  // check id the the user is there or not
+  // checking id the the user is there or not //
   const token = localStorage.getItem("userToken");
   useEffect(() => {
     if (token) {
@@ -25,7 +24,7 @@ const ProductItem = ({ product }) => {
     }
   }, [token]);
 
-  // Check if the item is already in the cart
+  // Checking if the item is already in the cart //
   const isInCart = cartItems?.some((item) => item.product._id === product._id);
 
   const handleAddToCart = () => {
@@ -45,7 +44,7 @@ const ProductItem = ({ product }) => {
   const halfStar = product.rating % 1 >= 0.5; // Half star if rating has decimal part
   const emptyStars = totalStars - fullStars - (halfStar ? 1 : 0); // Empty stars
 
-  // showing small description.
+  // showing small description. //
   const TruncateDescription = ({ description }) => {
     const truncated = description.split(" ").slice(0, 10).join(" ") + "...";
     return <span>{truncated}</span>;
@@ -75,7 +74,6 @@ const ProductItem = ({ product }) => {
             </h2>
           </Link>
           <p className="text-sm text-[#4e443e]">
-            {" "}
             <TruncateDescription description={product.description} />
           </p>
           <div className="mt-3 flex items-center">

@@ -61,7 +61,6 @@ const ProductDetail = () => {
 
   return (
     <>
-      {/*  */}
       <section className="container mx-auto mt-3 p-10 md:py-20 px-0 md:p-10 md:px-0">
         <section className="relative px-10 md:p-0 transform duration-500 hover:shadow-2xl cursor-pointer hover:-translate-y-1 ">
           <img

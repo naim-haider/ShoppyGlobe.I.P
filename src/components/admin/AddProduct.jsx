@@ -58,7 +58,6 @@ const AddProduct = () => {
             <div className="absolute inset-0 bg-gradient-to-r from-[#e2c8c3] to-[#c1a49e] shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl" />
             <div className="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-10">
               <div className=" mx-auto">
-                {/*  */}
                 <div className="flex justify-end">
                   <Link to={"/"}>
                     <button className="text-gray-700 hover:text-red-500">
@@ -79,7 +78,6 @@ const AddProduct = () => {
                     </button>
                   </Link>
                 </div>
-                {/*  */}
                 <div>
                   <h1 className="text-2xl font-semibold">Add a New Product</h1>
                 </div>

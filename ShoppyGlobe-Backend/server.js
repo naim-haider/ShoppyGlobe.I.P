@@ -10,7 +10,7 @@ connectDB();
 const app = express();
 
 // middlewares
-app.use(cors()); // Enable Cross-Origin Resource Sharing
+app.use(cors());
 app.use(express.json()); // to parse JSON bodies
 
 // Routes

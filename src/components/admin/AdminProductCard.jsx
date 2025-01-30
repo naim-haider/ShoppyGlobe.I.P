@@ -19,7 +19,6 @@ const AdminProductCard = ({ product }) => {
   });
   // console.log(product);
 
-  // check id the the user is there or not
   const token = localStorage.getItem("userToken");
   useEffect(() => {
     if (token) {
@@ -28,10 +27,11 @@ const AdminProductCard = ({ product }) => {
   }, [token]);
 
   // Edit an existing product //
-  // Handle input changes in the form
+  // Handle input changes in the form //
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
   const handleEditProduct = (product) => {
     setFormData({
       name: product.name,
@@ -96,7 +96,7 @@ const AdminProductCard = ({ product }) => {
   const halfStar = product.rating % 1 >= 0.5; // Half star if rating has decimal part
   const emptyStars = totalStars - fullStars - (halfStar ? 1 : 0); // Empty stars
 
-  // showing small description.
+  // showing small description. //
   const TruncateDescription = ({ description }) => {
     const truncated = description.split(" ").slice(0, 10).join(" ") + " ...";
     return <span>{truncated}</span>;
@@ -145,9 +145,7 @@ const AdminProductCard = ({ product }) => {
             {product.warrantyInformation}
           </span>
         </div>
-        {/*  */}
         <div className="flex justify-center items-center">
-          {/* Edit Product Modal */}
           {isOpen && (
             <div className="fixed z-10 inset-0 overflow-y-auto">
               <div className="flex items-center justify-center min-h-screen">

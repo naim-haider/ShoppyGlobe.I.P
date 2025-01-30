@@ -9,6 +9,7 @@ const UserRegister = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
+  // register user function
   const handleRegister = async (e) => {
     e.preventDefault();
     try {

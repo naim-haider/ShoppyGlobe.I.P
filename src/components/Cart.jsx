@@ -14,12 +14,14 @@ const Cart = () => {
     dispatch(getCartAsync());
   }, [dispatch]);
 
+  // calculating total amount
   const calculateTotal = () => {
     return cartProducts
       .reduce((total, item) => total + item?.product?.price * item?.quantity, 0)
       .toFixed(2);
   };
 
+  // clear cart dispatching function
   const handleClearCart = () => {
     dispatch(clearCartAsync());
   };

@@ -18,8 +18,11 @@ const Cart = lazy(() => import("./components/Cart"));
 const Checkout = lazy(() => import("./components/Checkout"));
 
 const PrivateRoute = ({ children }) => {
-  const userInfo = useSelector((state) => state.user.userInfo); // Get user from Redux store
-  return userInfo && !userInfo.isAdmin ? children : <Navigate to="/" />; // Redirect to login if not logged in
+  // Get user from Redux store //
+  const userInfo = useSelector((state) => state.user.userInfo);
+
+  // Redirect to login if not loggedin //
+  return userInfo && !userInfo.isAdmin ? children : <Navigate to="/" />;
 };
 
 function App() {
@@ -48,7 +51,6 @@ function App() {
               path="/product/review/:productId"
               element={<ProductReview />}
             />
-            {/* <Route path="/cart" element={<Cart />} /> */}
             <Route
               path="/cart"
               element={

@@ -124,7 +124,7 @@ export const clearCartAsync = createAsyncThunk(
       const response = await axios.delete(`${API_URL}/cart/clear`, {
         headers: { Authorization: `Bearer ${user.token}` },
       });
-      console.log(response.data);
+      // console.log(response.data);
 
       return response.data.items;
     } catch (error) {
@@ -159,7 +159,7 @@ const cartSlice = createSlice({
       })
       .addCase(addToCartAsync.fulfilled, (state, action) => {
         state.status = "succeeded";
-        console.log(action.payload);
+        // console.log(action.payload);
 
         state.items = action.payload.items;
         localStorage.setItem("cart", JSON.stringify({ items: state.items }));

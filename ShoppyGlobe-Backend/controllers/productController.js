@@ -3,7 +3,7 @@ import Product from "../models/ProductModel.js";
 // Fetch all products from the MongoDB database
 export const getProducts = async (req, res) => {
   try {
-    const products = await Product.find(); // Fetch all products from MongoDB
+    const products = await Product.find();
     res.status(200).json(products);
   } catch (error) {
     res.status(500).json({ message: "Error fetching products from MongoDB" });
@@ -14,7 +14,7 @@ export const getProducts = async (req, res) => {
 export const getProductById = async (req, res) => {
   try {
     const productID = req.params.id;
-    const product = await Product.findById(productID); // Fetch product by ID from MongoDB
+    const product = await Product.findById(productID);
     if (!product) {
       return res.status(404).json({ message: "Product not found" });
     }

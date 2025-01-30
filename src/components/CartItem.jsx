@@ -6,6 +6,7 @@ const CartItem = (item) => {
 
   const dispatch = useDispatch();
 
+  // increase the product quantity function
   const handleIncrease = () => {
     dispatch(
       updateCartAsync({
@@ -15,6 +16,7 @@ const CartItem = (item) => {
     );
   };
 
+  // decrease the product quantity function
   const handleDecrease = () => {
     if (item.product.quantity > 1) {
       dispatch(
@@ -26,6 +28,7 @@ const CartItem = (item) => {
     }
   };
 
+  // remove the item from the cart
   const handleRemove = () => {
     dispatch(removeFromCartAsync(item.product.product._id));
   };

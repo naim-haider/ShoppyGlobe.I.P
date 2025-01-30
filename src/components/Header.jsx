@@ -47,7 +47,6 @@ const Header = () => {
                 alt="mainlogo"
               />
               <div className=" flex items-center">
-                {/* Nav Links */}
                 <ul className="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-12">
                   <li>
                     <Link
@@ -72,8 +71,6 @@ const Header = () => {
                     </Link>
                   </li>
                 </ul>
-
-                {/* Header Icons */}
                 {isLogin ? (
                   <div className="hidden md:flex items-center space-x-5">
                     <Link
@@ -227,7 +224,6 @@ const Header = () => {
                 )}
               </div>
             </div>
-            {/* Responsive navbar */}
             <Link
               className="navbar-burger self-center text-[#f7f1f0] mr-6 md:hidden"
               to="/"
