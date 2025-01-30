@@ -16,10 +16,11 @@ const userSlice = createSlice({
       localStorage.setItem("userToken", action.payload.token);
     },
     logoutUser: (state) => {
-      (state.userInfo = null),
-        (state.token = null),
-        localStorage.removeItem("userToken");
+      state.userInfo = null;
+      state.token = null;
+      localStorage.removeItem("userToken");
       localStorage.removeItem("userInfo");
+      localStorage.removeItem("cart");
     },
   },
 });

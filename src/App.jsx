@@ -1,6 +1,6 @@
 import { lazy, Suspense, useState } from "react";
 import "./App.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import NotFound from "./components/NotFound";
 import ProductReview from "./components/ProductReview";
 import UserRegister from "./Authentication/UserRegister";
@@ -17,9 +17,14 @@ const ProductDetail = lazy(() => import("./components/ProductDetail"));
 const Cart = lazy(() => import("./components/Cart"));
 const Checkout = lazy(() => import("./components/Checkout"));
 
+const PrivateRoute = ({ children }) => {
+  const userInfo = useSelector((state) => state.user.userInfo); // Get user from Redux store
+  return userInfo && !userInfo.isAdmin ? children : <Navigate to="/" />; // Redirect to login if not logged in
+};
+
 function App() {
   const userInfo = useSelector((state) => state.user.userInfo);
-  console.log(userInfo);
+  // console.log(userInfo);
   return (
     <>
       <BrowserRouter>
@@ -43,7 +48,16 @@ function App() {
               path="/product/review/:productId"
               element={<ProductReview />}
             />
-            <Route path="/cart" element={<Cart />} />
+            {/* <Route path="/cart" element={<Cart />} /> */}
+            <Route
+              path="/cart"
+              element={
+                <PrivateRoute>
+                  <Cart />
+                </PrivateRoute>
+              }
+            />
+
             <Route path="/checkout" element={<Checkout />} />
             <Route path="*" element={<NotFound />} />
             <Route />

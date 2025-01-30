@@ -1,6 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../redux/cartSlice";
+import { addToCartAsync } from "../redux/cartSlice";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -11,7 +11,7 @@ const ProductDetail = () => {
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.user.userInfo);
   const [isLogin, setIsLogin] = useState(false);
-  console.log(userInfo);
+  // console.log(userInfo);
 
   // console.log(product);
 
@@ -29,17 +29,18 @@ const ProductDetail = () => {
       .then((response) => setProduct(response.data))
       .catch((err) => setError(err.message));
   }, []);
-  console.log(product);
+  // console.log(product);
 
   // for item already in the cart //
   const cartItems = useSelector((state) => state.cart.items);
   const [addedMessage, setAddedMessage] = useState("");
+  // console.log(cartItems);
 
   if (error) return <div>Error: {error}</div>;
   if (!product) return <div>Loading...</div>;
 
   // Check if the item is already in the cart
-  const isInCart = cartItems.some((item) => item._id === product._id);
+  const isInCart = cartItems.some((item) => item.product._id === product._id);
 
   const handleAddToCart = () => {
     if (isInCart) {
@@ -48,7 +49,7 @@ const ProductDetail = () => {
         setAddedMessage("");
       }, 2000); // Hide the message after 2 seconds
     } else {
-      dispatch(addToCart(product));
+      dispatch(addToCartAsync(product));
     }
   };
 
@@ -87,7 +88,7 @@ const ProductDetail = () => {
             <p className="my-3 text-justify font-medium text-gray-700 leading-relaxed">
               {product.description}
             </p>
-            {!userInfo.isAdmin && isLogin ? (
+            {!userInfo?.isAdmin && isLogin ? (
               <>
                 <button
                   onClick={handleAddToCart}

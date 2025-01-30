@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 const AdminProductCard = ({ product }) => {
-  const [addedMessage, setAddedMessage] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+  const userInfo = useSelector((state) => state.user.userInfo);
+  const [isLogin, setIsLogin] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     price: "",
@@ -16,6 +18,14 @@ const AdminProductCard = ({ product }) => {
     rating: "",
   });
   // console.log(product);
+
+  // check id the the user is there or not
+  const token = localStorage.getItem("userToken");
+  useEffect(() => {
+    if (token) {
+      setIsLogin(true);
+    }
+  }, [token]);
 
   // Edit an existing product //
   // Handle input changes in the form
@@ -117,7 +127,6 @@ const AdminProductCard = ({ product }) => {
             </h2>
           </Link>
           <p className="text-sm text-[#4e443e]">
-            {" "}
             <TruncateDescription description={product.description} />
           </p>
           <div className="mt-3 flex items-center">
@@ -143,7 +152,6 @@ const AdminProductCard = ({ product }) => {
             <div className="fixed z-10 inset-0 overflow-y-auto">
               <div className="flex items-center justify-center min-h-screen">
                 <div className="bg-white w-3/4 xl:w-1/2 sm:w-3/4 p-6 rounded shadow-md">
-                  {/* Close Button */}
                   <div className="flex justify-end">
                     <button
                       onClick={() => setIsOpen(false)}
@@ -318,33 +326,33 @@ const AdminProductCard = ({ product }) => {
             </div>
           )}
         </div>
-        {/*  */}
-        <div className="p-1 border-t border-b text-xs text-gray-700">
-          <div className="flex justify-evenly">
-            <button
-              onClick={() => {
-                setIsOpen(true);
-                handleEditProduct(product);
-              }}
-              className="w-2/5"
-            >
-              <span className="flex cursor-pointer justify-center items-center p-2 rounded-md w-full text-sm tracking-wide bg-green-400 text-[#262220] transition-all duration-500 hover:bg-transparent hover:border-solid hover:border-[1px] hover:border-green-400 hover:text-green-500">
-                Edit Item
-              </span>
-            </button>
-            <button
-              className="w-2/5"
-              onClick={() => handleDeleteProduct(product._id)}
-            >
-              <span className="flex cursor-pointer justify-center items-center p-2 rounded-md w-full text-sm tracking-wide bg-red-400 text-[#262220] transition-all duration-500 hover:bg-transparent hover:border-solid hover:border-[1px] hover:border-red-400 hover:text-red-500">
-                Delete Item
-              </span>
-            </button>
+        {userInfo?.isAdmin && isLogin ? (
+          <div className="p-1 border-t border-b text-xs text-gray-700">
+            <div className="flex justify-evenly">
+              <button
+                onClick={() => {
+                  setIsOpen(true);
+                  handleEditProduct(product);
+                }}
+                className="w-2/5"
+              >
+                <span className="flex cursor-pointer justify-center items-center p-2 rounded-md w-full text-sm tracking-wide bg-green-400 text-[#262220] transition-all duration-500 hover:bg-transparent hover:border-solid hover:border-[1px] hover:border-green-400 hover:text-green-500">
+                  Edit Item
+                </span>
+              </button>
+              <button
+                className="w-2/5"
+                onClick={() => handleDeleteProduct(product._id)}
+              >
+                <span className="flex cursor-pointer justify-center items-center p-2 rounded-md w-full text-sm tracking-wide bg-red-400 text-[#262220] transition-all duration-500 hover:bg-transparent hover:border-solid hover:border-[1px] hover:border-red-400 hover:text-red-500">
+                  Delete Item
+                </span>
+              </button>
+            </div>
           </div>
-          <span className="flex items-center justify-center">
-            {addedMessage && <p className="added-message">{addedMessage}</p>}
-          </span>
-        </div>
+        ) : (
+          <></>
+        )}
       </div>
     </>
   );

@@ -1,24 +1,33 @@
 import { useDispatch } from "react-redux";
-import {
-  decreaseQuantity,
-  increaseQuantity,
-  removeFromCart,
-} from "../redux/cartSlice";
+import { removeFromCartAsync, updateCartAsync } from "../redux/cartSlice";
 
-const CartItem = ({ item }) => {
-  const dispatch = useDispatch();
+const CartItem = (item) => {
   console.log(item);
 
-  const handleRemove = () => {
-    dispatch(removeFromCart(item._id));
-  };
+  const dispatch = useDispatch();
 
   const handleIncrease = () => {
-    dispatch(increaseQuantity(item._id));
+    dispatch(
+      updateCartAsync({
+        ...item.product.product,
+        quantity: item.product.quantity + 1,
+      })
+    );
   };
 
   const handleDecrease = () => {
-    dispatch(decreaseQuantity(item._id));
+    if (item.product.quantity > 1) {
+      dispatch(
+        updateCartAsync({
+          ...item.product.product,
+          quantity: item.product.quantity - 1,
+        })
+      );
+    }
+  };
+
+  const handleRemove = () => {
+    dispatch(removeFromCartAsync(item.product.product._id));
   };
 
   return (
@@ -26,7 +35,7 @@ const CartItem = ({ item }) => {
       <div className="rounded-3xl border-2 border-gray-200 p-4 lg:p-8 grid grid-cols-12 mb-8 max-lg:max-w-lg max-lg:mx-auto gap-y-4 ">
         <div className="col-span-12 lg:col-span-2 img box">
           <img
-            src={item.image}
+            src={item.product.product.image}
             alt="product-image"
             className="max-lg:w-full lg:w-[180px] rounded-lg object-cover"
           />
@@ -34,7 +43,7 @@ const CartItem = ({ item }) => {
         <div className="col-span-12 lg:col-span-10 detail w-full lg:pl-3">
           <div className="flex items-center justify-between w-full mb-4">
             <h5 className="font-manrope font-bold text-2xl leading-9 text-[#3a3430]">
-              {item.name}
+              {item.product.product.name}
             </h5>
             <button
               onClick={handleRemove}
@@ -65,7 +74,7 @@ const CartItem = ({ item }) => {
             </button>
           </div>
           <p className="font-normal text-base leading-7 text-gray-500 mb-6">
-            {item.description}
+            {item.product.product.description}
           </p>
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-4">
@@ -91,7 +100,7 @@ const CartItem = ({ item }) => {
                 </svg>
               </button>
               <span className="border text-gray-500 border-gray-200 rounded-full w-10 aspect-square outline-none font-semibold text-sm py-1.5 px-3 bg-gray-100  text-center">
-                {item.quantity}
+                {item.product.quantity}
               </span>
               <button
                 onClick={handleIncrease}
@@ -116,7 +125,7 @@ const CartItem = ({ item }) => {
               </button>
             </div>
             <h6 className="text-[#554a44] font-manrope font-bold text-2xl leading-9 text-right">
-              ${item.price}
+              ${item.product.product.price}
             </h6>
           </div>
         </div>

@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { removeFromCart, clearCart } from "../redux/cartSlice";
+import { removeFromCartAsync, clearCartAsync } from "../redux/cartSlice";
 import { Link, useNavigate } from "react-router-dom";
 
 const Checkout = () => {
   const cartItems = useSelector((state) => state.cart.items);
+  console.log(cartItems);
+
   const [shippingDetails, setShippingDetails] = useState({
     firstName: "",
     lastName: "",
@@ -20,7 +22,7 @@ const Checkout = () => {
   const navigate = useNavigate();
 
   const handleRemoveFromCart = (id) => {
-    dispatch(removeFromCart(id));
+    dispatch(removeFromCartAsync(id));
   };
 
   const handleInputChange = (e) => {
@@ -32,7 +34,6 @@ const Checkout = () => {
   };
 
   const handleSubmitOrder = () => {
-    // handled the situation where the user not fill all the details
     if (
       !shippingDetails.firstName ||
       !shippingDetails.lastName ||
@@ -51,14 +52,13 @@ const Checkout = () => {
     }
 
     setMessage("Your order has been submitted successfully!");
-    dispatch(clearCart());
+    dispatch(clearCartAsync());
     navigate("/"); // Redirect to home after order
   };
 
-  // calculating total
   const calculateTotal = () => {
     return cartItems
-      .reduce((total, item) => total + item.price * item.quantity, 0)
+      .reduce((total, item) => total + item.product.price * item.quantity, 0)
       .toFixed(2);
   };
 
@@ -76,23 +76,25 @@ const Checkout = () => {
                     <div>
                       {cartItems.map((item) => (
                         <div
-                          key={item.id}
+                          key={item.product._id}
                           className="flex items-start gap-4 mb-4"
                         >
                           <div className="w-32 h-28 max-lg:w-24 max-lg:h-24 flex p-3 shrink-0 bg-gray-200 rounded-md">
                             <img
-                              src={item.images[0]}
+                              src={item.product.image}
                               className="w-full object-contain"
                             />
                           </div>
                           <div className="w-full">
-                            <h3 className="text-sm lg:text-base text-gray-800">
-                              {item.name}
+                            <h3 className="text-sm underline lg:text-base text-gray-800">
+                              {item.product.name}
                             </h3>
                             <ul className="text-xs text-gray-800 space-y-1 mt-3">
                               <li className="flex flex-wrap gap-4">
                                 Price{" "}
-                                <span className="ml-auto">${item.price}</span>
+                                <span className="ml-auto">
+                                  ${item.product.price}
+                                </span>
                               </li>
                               <li className="flex flex-wrap gap-4">
                                 Quantity{" "}
@@ -101,12 +103,15 @@ const Checkout = () => {
                               <li className="flex flex-wrap gap-4">
                                 Total Price{" "}
                                 <span className="ml-auto">
-                                  ${item.price * item.quantity}
+                                  ${item.product.price * item.quantity}
                                 </span>
                               </li>
                               <li className="flex flex-wrap gap-4">
                                 <button
-                                  onClick={() => handleRemoveFromCart(item.id)}
+                                  className="rounded-full relative right-1 py-[1px] px-2.5 bg-[#ece6e5] text-[#a58b86] font-semibold text-xs text-center whitespace-nowrap transition-all duration-500 hover:bg-[#dfd8d6]"
+                                  onClick={() =>
+                                    handleRemoveFromCart(item.product._id)
+                                  }
                                 >
                                   remove
                                 </button>

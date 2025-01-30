@@ -1,16 +1,32 @@
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../redux/cartSlice";
+// import { addToCart } from "../redux/cartSlice";
+import { addToCartAsync, getCartAsync } from "../redux/cartSlice";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const ProductItem = ({ product }) => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
   const [addedMessage, setAddedMessage] = useState("");
+  const userInfo = useSelector((state) => state.user.userInfo);
+  const [isLogin, setIsLogin] = useState(false);
   // console.log(product);
+  // console.log(cartItems);
+
+  useEffect(() => {
+    dispatch(getCartAsync());
+  }, [dispatch]);
+
+  // check id the the user is there or not
+  const token = localStorage.getItem("userToken");
+  useEffect(() => {
+    if (token) {
+      setIsLogin(true);
+    }
+  }, [token]);
 
   // Check if the item is already in the cart
-  const isInCart = cartItems.some((item) => item._id === product._id);
+  const isInCart = cartItems?.some((item) => item.product._id === product._id);
 
   const handleAddToCart = () => {
     if (isInCart) {
@@ -19,8 +35,7 @@ const ProductItem = ({ product }) => {
         setAddedMessage("");
       }, 2000); // Hide the message after 2 seconds
     } else {
-      dispatch(addToCart(product));
-      console.log(addToCart(product));
+      dispatch(addToCartAsync(product));
     }
   };
 
@@ -32,7 +47,7 @@ const ProductItem = ({ product }) => {
 
   // showing small description.
   const TruncateDescription = ({ description }) => {
-    const truncated = description.split(" ").slice(0, 10).join(" ") + " ...";
+    const truncated = description.split(" ").slice(0, 10).join(" ") + "...";
     return <span>{truncated}</span>;
   };
   return (
@@ -71,16 +86,20 @@ const ProductItem = ({ product }) => {
             <span className="text-sm font-semibold">$</span>
           </div>
         </div>
-        <div className="p-1 border-t border-b text-xs text-gray-700">
-          <button className="w-full" onClick={handleAddToCart}>
-            <span className="flex cursor-pointer justify-center items-center p-2 rounded-md w-full text-sm tracking-wide bg-[#c1a49e] text-[#262220] transition-all duration-500 hover:bg-transparent hover:border-solid hover:border-[1px] hover:border-[#262220]">
-              {isInCart ? "Added to Cart" : "Add to Cart"}
+        {!userInfo?.isAdmin && isLogin ? (
+          <div className="p-1 border-t border-b text-xs text-gray-700">
+            <button className="w-full" onClick={handleAddToCart}>
+              <span className="flex cursor-pointer justify-center items-center p-2 rounded-md w-full text-sm tracking-wide bg-[#c1a49e] text-[#262220] transition-all duration-500 hover:bg-transparent hover:border-solid hover:border-[1px] hover:border-[#262220]">
+                {isInCart ? "Added to Cart" : "Add to Cart"}
+              </span>
+            </button>
+            <span className="flex items-center justify-center">
+              {addedMessage && <p className="added-message">{addedMessage}</p>}
             </span>
-          </button>
-          <span className="flex items-center justify-center">
-            {addedMessage && <p className="added-message">{addedMessage}</p>}
-          </span>
-        </div>
+          </div>
+        ) : (
+          <></>
+        )}
         <div className="p-4 flex items-center justify-between text-base text-yellow-400">
           {"★".repeat(fullStars)}
           {halfStar ? "☆" : ""}

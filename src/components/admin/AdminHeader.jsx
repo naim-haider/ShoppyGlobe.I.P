@@ -21,6 +21,8 @@ const Header = () => {
   const handleLogout = () => {
     if (isLogin) {
       localStorage.removeItem("userToken");
+      localStorage.removeItem("cart");
+      localStorage.removeItem("userInfo");
       setIsLogin(false);
       navigate("/login");
     }
@@ -82,7 +84,6 @@ const Header = () => {
                         </div>
                       </div>
                     </Link>
-                    {/*  */}
                     <div
                       onClick={() => setOpen(!open)}
                       className={`relative  border-b-4 border-transparent  ${
@@ -140,7 +141,6 @@ const Header = () => {
                         </div>
                       )}
                     </div>
-                    {/*  */}
                   </div>
                 ) : (
                   <div

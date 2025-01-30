@@ -59,9 +59,6 @@ const AdminDashboard = () => {
           </svg>
         </div>
       </div>
-      {/*  */}
-
-      {/*  */}
       <div className="container mx-auto">
         <div className="flex flex-wrap justify-center gap-5">
           {filteredProducts.length === 0 ? (

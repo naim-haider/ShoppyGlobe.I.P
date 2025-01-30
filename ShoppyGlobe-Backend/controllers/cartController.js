@@ -5,7 +5,7 @@ import Product from "../models/ProductModel.js";
 export const getCart = async (req, res) => {
   try {
     const cart = await Cart.findOne({ userId: req.user.id });
-    console.log(cart);
+    // console.log(cart);
 
     if (!cart) {
       return res.status(404).json({ error: "Cart not found" });
