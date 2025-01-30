@@ -28,7 +28,7 @@ const UserRegister = () => {
 
   return (
     <>
-      <section className="relative py-20 2xl:py-40 bg-transparent overflow-hidden">
+      <section className="relative mt-20 md:mt-24 xl:mt-0 2xl:my-40  bg-transparent overflow-hidden">
         <img
           className="hidden lg:block absolute inset-0 mt-32"
           src="zospace-assets/lines/line-mountain.svg"
@@ -42,9 +42,9 @@ const UserRegister = () => {
         <div className="relative container px-4 mx-auto">
           <div className="max-w-5xl mx-auto">
             <div className="flex flex-wrap items-center -mx-4">
-              <div className="w-full lg:w-1/2 px-4 mb-16 lg:mb-0">
+              <div className="w-full lg:w-1/2 px-4 mb-8 lg:mb-0">
                 <div className="max-w-md">
-                  <span className="text-lg text-[#534c49] font-bold">
+                  <span className="text-lg relative top-6 text-[#534c49] font-bold">
                     Register Account
                   </span>
                   <h2 className="mt-8 text-5xl font-bold font-heading text-[#262220]">

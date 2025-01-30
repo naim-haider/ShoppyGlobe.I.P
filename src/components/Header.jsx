@@ -104,7 +104,6 @@ const Header = () => {
                         Cart <sup className="">{cartItems?.length}</sup>
                       </p>
                     </Link>
-                    {/*  */}
                     <div
                       onClick={() => setOpen(!open)}
                       className={`relative  border-b-4 border-transparent  ${
@@ -135,11 +134,11 @@ const Header = () => {
                             </li>
                             <hr className="dark:border-gray-700" />
                             <li className="font-medium">
-                              <div className="flex items-center transform transition-colors duration-200 border-r-4 border-transparent hover:border-red-600">
-                                <div
-                                  onClick={handleLogout}
-                                  className="mr-3 cursor-pointer text-red-600"
-                                >
+                              <div
+                                onClick={handleLogout}
+                                className="flex items-center cursor-pointer transform transition-colors duration-200 border-r-4 border-transparent hover:border-red-600"
+                              >
+                                <div className="mr-3 cursor-pointer text-red-600">
                                   <svg
                                     className="w-6 h-6"
                                     fill="none"
@@ -162,7 +161,6 @@ const Header = () => {
                         </div>
                       )}
                     </div>
-                    {/*  */}
                   </div>
                 ) : (
                   <div
@@ -202,10 +200,7 @@ const Header = () => {
                           <li className="font-medium">
                             <Link to={"/login"} className="cursor-pointer">
                               <div className="flex items-center transform transition-colors duration-200 border-r-4 border-transparent hover:border-green-600">
-                                <div
-                                  onClick={handleLogout}
-                                  className="mr-3 cursor-pointer text-green-600"
-                                >
+                                <div className="mr-3 cursor-pointer text-green-600">
                                   <svg
                                     className="w-6 h-6"
                                     fill="none"
@@ -295,9 +290,28 @@ const Header = () => {
                   </div>
 
                   {open && (
-                    <div className="absolute top-16 right-0 w-60 px-5 py-3 dark:bg-gray-800 bg-white rounded-lg shadow border dark:border-transparent">
+                    <div className="absolute top-16  right-0 w-60 px-5 py-3 dark:bg-gray-800 bg-white rounded-lg shadow border dark:border-transparent">
                       <ul className="space-y-3 dark:text-white">
                         <li className="font-serif font-thin flex flex-col items-center justify-center">
+                          <div
+                            onClick={handleLogout}
+                            className="absolute top-4 right-4 cursor-pointer text-red-600"
+                          >
+                            <svg
+                              className="w-7 h-7"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                              />
+                            </svg>
+                          </div>
                           <div className="w-8 h-8 bg-[#c1a49e] flex items-center justify-center rounded-full overflow-hidden">
                             <p className="text-[#f7f1f0]">
                               {userInfo?.userName[0].toUpperCase()}
@@ -305,31 +319,6 @@ const Header = () => {
                           </div>
                           <p className="mt-1">{userInfo.userName}</p>
                           <p className="mt-1">{userInfo.email}</p>
-                        </li>
-                        <hr className="dark:border-gray-700" />
-                        <li className="font-medium">
-                          <div className="flex items-center transform transition-colors duration-200 border-r-4 border-transparent hover:border-red-600">
-                            <div
-                              onClick={handleLogout}
-                              className="mr-3 cursor-pointer text-red-600"
-                            >
-                              <svg
-                                className="w-6 h-6"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  strokeWidth={2}
-                                  d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
-                                />
-                              </svg>
-                            </div>
-                            Logout
-                          </div>
                         </li>
                       </ul>
                     </div>
@@ -356,7 +345,7 @@ const Header = () => {
                 </div>
 
                 {open && (
-                  <div className="absolute top-16 right-0 w-60 px-5 py-3 dark:bg-gray-800 bg-white rounded-lg shadow border dark:border-transparent">
+                  <div className="absolute top-10 right-8 w-60 px-5 py-3 dark:bg-gray-800 bg-white rounded-lg shadow border dark:border-transparent">
                     <ul className="space-y-3 dark:text-white">
                       <li className="font-serif font-thin flex flex-col items-center justify-center">
                         <div className="w-7 h-7 flex items-center justify-center rounded-full overflow-hidden">
@@ -374,10 +363,7 @@ const Header = () => {
                       <li className="font-medium">
                         <Link to={"/login"} className="cursor-pointer">
                           <div className="flex items-center transform transition-colors duration-200 border-r-4 border-transparent hover:border-green-600">
-                            <div
-                              onClick={handleLogout}
-                              className="mr-3 cursor-pointer text-green-600"
-                            >
+                            <div className="mr-3 cursor-pointer text-green-600">
                               <svg
                                 className="w-6 h-6"
                                 fill="none"
