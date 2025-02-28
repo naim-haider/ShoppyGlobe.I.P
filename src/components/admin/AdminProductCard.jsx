@@ -4,6 +4,7 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 
 const AdminProductCard = ({ product }) => {
+  const { VITE_API_ENDPOINT } = import.meta.env;
   const [isOpen, setIsOpen] = useState(false);
   const userInfo = useSelector((state) => state.user.userInfo);
   const [isLogin, setIsLogin] = useState(false);
@@ -49,7 +50,7 @@ const AdminProductCard = ({ product }) => {
     e.preventDefault();
     try {
       const response = await axios.put(
-        `http://localhost:5000/api/admin/update-product/${product._id}`,
+        `${VITE_API_ENDPOINT}/admin/update-product/${product._id}`,
         formData,
         {
           headers: {
@@ -77,14 +78,11 @@ const AdminProductCard = ({ product }) => {
   // Delete a product
   const handleDeleteProduct = async (id) => {
     try {
-      await axios.delete(
-        `http://localhost:5000/api/admin/delete-product/${id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("userToken")}`,
-          },
-        }
-      );
+      await axios.delete(`${VITE_API_ENDPOINT}/admin/delete-product/${id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("userToken")}`,
+        },
+      });
     } catch (err) {
       console.error("Error deleting product:", err);
     }

@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const AddProduct = () => {
+  const { VITE_API_ENDPOINT } = import.meta.env;
   const [formData, setFormData] = useState({
     name: "",
     price: "",
@@ -26,7 +27,7 @@ const AddProduct = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/admin/add-product",
+        `${VITE_API_ENDPOINT}/admin/add-product`,
         formData,
         {
           headers: {

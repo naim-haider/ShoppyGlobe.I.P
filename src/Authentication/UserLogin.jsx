@@ -5,6 +5,7 @@ import { loginUser } from "../redux/userSlice";
 import { Link, useNavigate } from "react-router-dom";
 
 const UserLogin = () => {
+  const { VITE_API_ENDPOINT } = import.meta.env;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -15,10 +16,10 @@ const UserLogin = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post(
-        "http://localhost:5000/api/users/login",
-        { email, password }
-      );
+      const { data } = await axios.post(`${VITE_API_ENDPOINT}/users/login`, {
+        email,
+        password,
+      });
       console.log("user login data", data.user);
       console.log("user login data", data.token);
       dispatch(loginUser({ userInfo: data.user, token: data.token }));

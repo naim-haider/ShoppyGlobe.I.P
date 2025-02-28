@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const ProductDetail = () => {
+  const { VITE_API_ENDPOINT } = import.meta.env;
   const [product, setProduct] = useState([]);
   const [error, setError] = useState("");
   const { productId } = useParams();
@@ -25,7 +26,7 @@ const ProductDetail = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/products/${productId}`)
+      .get(`${VITE_API_ENDPOINT}/products/${productId}`)
       .then((response) => setProduct(response.data))
       .catch((err) => setError(err.message));
   }, []);
