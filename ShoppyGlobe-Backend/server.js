@@ -21,6 +21,7 @@ app.use("/api", productRoutes);
 app.use("/api", cartRoutes);
 app.use("/api", userRoutes);
 app.use("/api", adminRoutes);
+
 app.get("/", (req, res) => {
   res.send("root route");
 });
